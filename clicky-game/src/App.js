@@ -11,6 +11,7 @@ import image9 from './images/9.png';
 import image10 from './images/10.png';
 import image11 from './images/11.png';
 import image12 from './images/12.png';
+import react from './images/react.png';
 
 
 import './App.css';
@@ -84,17 +85,20 @@ class App extends Component {
     images:images,
     score: 0,
     message: "Click any image to begin"
-
   };
 
 
   handleimageclick = (id) => {
-    this.setState({
-      score: this.state.score + 1,
-      message: "correc!"
-    })
-    console.log(id);
 
+    // const images = this.state.images.filter(eachitem => index !== id);
+
+
+      this.setState({
+        score: this.state.score + 1,
+        message: "You Guessed Correctly and clicked!",
+        // clicked: this.images.clicked 
+      })
+      console.log(id);  
   }
 
 
@@ -102,23 +106,36 @@ class App extends Component {
   render() {
 
     var displayimages = this.state.images.map ((eachitem,index) => 
-      <img  key={index} src={eachitem.url} onClick={() =>this.handleimageclick(eachitem.id)} alt={eachitem.id}></img>
+      <img  key={index} className="click-image" src={eachitem.url} onClick={() =>this.handleimageclick(eachitem.id)} alt={eachitem.id}></img>
     )
 
     return (
       <div className="App">
 
-      <div className="header"> 
-        <div> Clicky Game</div>
+          <div className="header"> 
+            <span> <strong>  Christmas Clicky Game </strong> </span>
+            <span> <strong>  {this.state.message} </strong>  </span>
+            <span> <strong>  Score: {this.state.score} </strong>  </span>
+            {/* <div className="instructions"> 
+              <p>Lets Click!</p>
+              <p>Click on an image to earn points, but don't click on any more than once!</p>
+            </div> */}
+           
+          </div>
 
-        <div> {this.state.message} </div>
+          <div className="container"> 
+               <div className="images"> {displayimages} </div>
+          </div>
 
-        <div> Score: {this.state.score}  </div>
+          <footer className="footer">
+            <div className="bottom">
+                {/* <img alt="react" src={react}> </img> */}
+                <p > <strong> Copyright © 2018 by Gabriela Elizabeth Menocal Cover </strong>  </p>
 
-      
-       </div>
+             </div>
+          
+          </footer>
 
-       <div className="images"> {displayimages} </div>
         
       </div>
     );
