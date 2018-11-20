@@ -1,0 +1,21 @@
+.App {
+  text-align: center;
+}
+
+.header {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  background-color: green;
+  padding: 40px;
+  color: white;
+  font-size: 30px;
+}
+
+.images {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-gap: 40px;
+  padding: 40px;
+ 
+}
+
