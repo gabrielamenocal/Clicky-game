@@ -85,20 +85,27 @@ class App extends Component {
     images:images,
     score: 0,
     message: "Click any image to begin"
+    
   };
 
 
   handleimageclick = (id) => {
 
-    // const images = this.state.images.filter(eachitem => index !== id);
-
-
-      this.setState({
-        score: this.state.score + 1,
-        message: "You Guessed Correctly and clicked!",
-        // clicked: this.images.clicked 
-      })
-      console.log(id);  
+    let score = this.state.score , message;
+    console.log(id);  
+    console.log(this.state);
+    let allImages = [...this.state.images]
+    const isClicked = allImages[id].clicked
+    if(!isClicked){
+      score++
+      message= "You Guessed Incorrectly"
+    }else{
+      score > 0 && score--
+      message="You Guessed Correctly and clicked!"
+    }
+    allImages[id].clicked =  true
+    this.setState( {images:allImages.sort(() => Math.random() - 0.5), score, message})
+      
   }
 
 
@@ -106,14 +113,14 @@ class App extends Component {
   render() {
 
     var displayimages = this.state.images.map ((eachitem,index) => 
-      <img  key={index} className="click-image" src={eachitem.url} onClick={() =>this.handleimageclick(eachitem.id)} alt={eachitem.id}></img>
+      <img  key={index} className="click-image"  src={eachitem.url} onClick={() =>this.handleimageclick(index)} alt={eachitem.id}></img>
     )
 
     return (
       <div className="App">
 
           <div className="header"> 
-            <span> <strong>  Christmas Clicky Game </strong> </span>
+            <span> <strong>  Christmas Clicky Game!!!  </strong> </span>
             <span> <strong>  {this.state.message} </strong>  </span>
             <span> <strong>  Score: {this.state.score} </strong>  </span>
             {/* <div className="instructions"> 
